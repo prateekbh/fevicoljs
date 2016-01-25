@@ -1,4 +1,16 @@
-(function(window, riot) {
+(function (root, factory) {
+    "use strict";
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['riot'], factory);
+    } else if (typeof exports === 'object' && typeof exports.nodeName !== 'string') {
+        // CommonJS
+        module.exports = factory(require('riot'));
+    } else {
+        // Browser globals
+        root.veronica = factory(riot);
+    }
+}(this, function(riot) {
     "use strict";
 
     var veronica = {
@@ -909,6 +921,7 @@ Description : This facilitates the initialization of the framework
 })(gems,veronica);
     veronica.flux = gems.flux;
     veronica.http=gems.httpGlobal;
-    window.veronica = veronica;
 
-})(window, riot);
+    return veronica;
+
+}));
